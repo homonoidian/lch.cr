@@ -81,7 +81,7 @@ module LCH
     end
   end
 
-  # Returns an R, G, B tuple for the given LCH (CIELch) color.
+  # Returns an R, G, B tuple for the given LCH (CIELCh) color.
   #
   # The lightness component *l*, percents, is clamped to (and
   # should be in) the range [0; 100].
@@ -90,6 +90,10 @@ module LCH
   # the range [0; 145].
   #
   # The resulting R, G, B components are in the range [0; 255].
+  #
+  # ```
+  # LCH.lch2rgb(l: 32.17, c: 55.27, h: 327.61) # {123, 40, 123}
+  # ```
   def lch2rgb(l : Number, c : Number, h : Number) : {Int32, Int32, Int32}
     if rgb = lch_as_srgb?(l, c, h)
       r, g, b = rgb
@@ -117,8 +121,14 @@ module LCH
 
   # Converts the first three items in *lch* to RGB.
   #
-  # Assumes the three first items are `Number`-typed L, C, H
-  # values, correspondingly.
+  # Assumes the indexable to be `Number`-typed, and contain at
+  # least three values -- for L, C, and H, correspondingly.
+  #
+  # ```
+  # LCH.lch2rgb([32.17, 55.27, 327.61]) # {123, 40, 123}
+  # LCH.lch2rgb({32.17, 55.27, 327.61}) # {123, 40, 123}
+  # # ... etc
+  # ```
   def lch2rgb(lch : Indexable) : {Int32, Int32, Int32}
     lch2rgb(lch[0], lch[1], lch[2])
   end
@@ -137,7 +147,7 @@ module LCH
     t > LAB_T3 ? Math.cbrt(t) : t / LAB_T2 + LAB_T0
   end
 
-  # Returns a CIELch L, C, H tuple for the given CIELAB color.
+  # Returns a CIELCh L, C, H tuple for the given CIELAB color.
   def lab2lch(l, a, b)
     c = Math.sqrt(a ** 2 + b ** 2)
     h = (Math.atan2(b, a) * 180 / Math::PI + 360) % 360
@@ -174,6 +184,10 @@ module LCH
   #
   # The resulting hue component H is in degress, in range [0; 360],
   # rounded to two digits after the decimal place.
+  #
+  # ```
+  # LCH.rgb2lch(r: 123, g: 40, b: 123) # {32.17, 55.27, 327.61}
+  # ```
   def rgb2lch(r : Int, g : Int, b : Int) : {Float64, Float64, Float64}
     r = r.clamp(0..255)
     g = g.clamp(0..255)
@@ -194,8 +208,14 @@ module LCH
 
   # Converts the first three items in *rgb* to LCH.
   #
-  # Assumes the three first items are `Int`-typed R, G, B
-  # values, correspondingly.
+  # Assumes the indexable to be `Int`-typed, and contain at
+  # least three values -- for R, G, and B, correspondingly.
+  #
+  # ```
+  # LCH.rgb2lch([123, 40, 123]) # {32.17, 55.27, 327.61}
+  # LCH.rgb2lch({123, 40, 123}) # {32.17, 55.27, 327.61}
+  # # ... etc
+  # ```
   def rgb2lch(rgb : Indexable) : {Float64, Float64, Float64}
     rgb2lch(rgb[0], rgb[1], rgb[2])
   end
