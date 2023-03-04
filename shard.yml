@@ -1,0 +1,9 @@
+name: lch
+version: 0.1.0
+
+authors:
+  - Alexey Yurchenko <homonoidian@yandex.ru>
+
+crystal: ">= 1.7.0"
+
+license: MIT
