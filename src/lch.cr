@@ -83,11 +83,15 @@ module LCH
 
   # Returns an R, G, B tuple for the given LCH (CIELCh) color.
   #
-  # The lightness component *l*, percents, is clamped to (and
-  # should be in) the range [0; 100].
+  # The lightness component *l* is in percents, between 0
+  # (representing black) and 100 (representing white).
   #
-  # The chroma component *c* is clamped to (and should be in)
-  # the range [0; 145].
+  # The chroma component *c* (roughly representing the "amount
+  # of color") is a number greater than or equal to 0. Note
+  # that although chroma is theoretically unbounded, in practice
+  # it does not exceed 230.
+  #
+  # The hue component *h* is in degrees.
   #
   # The resulting R, G, B components are in the range [0; 255].
   #
@@ -95,6 +99,10 @@ module LCH
   # LCH.lch2rgb(l: 32.17, c: 55.27, h: 327.61) # {123, 40, 123}
   # ```
   def lch2rgb(l : Number, c : Number, h : Number) : {Int32, Int32, Int32}
+    l = l.clamp(0..100)
+    c = Math.max(c, 0)
+    h = Math.max(h, 0)
+
     if rgb = lch_as_srgb?(l, c, h)
       r, g, b = rgb
     else
@@ -176,14 +184,18 @@ module LCH
   #
   # *r*, *g*, and *b* are clamped between [0; 255].
   #
-  # The resulting lightness component L is in percents, in range
-  # [0; 100], rounded to two digits after the decimal place.
-  #
-  # The resulting chroma component C is in range [0; 145], rounded
+  # The resulting lightness component L is in percents, between
+  # 0 (representing black) and 100 (representing white), rounded
   # to two digits after the decimal place.
   #
-  # The resulting hue component H is in degress, in range [0; 360],
-  # rounded to two digits after the decimal place.
+  # The resulting chroma component C (roughly representing the
+  # "amount of color") is a number greater than or equal to 0,
+  # rounded to two digits after the decimal place. Note that
+  # although chroma is theoretically unbounded, in practice it
+  # does not exceed 230.
+  #
+  # The resulting hue component H is in degress, between 0
+  # and 360, rounded to two digits after the decimal place.
   #
   # ```
   # LCH.rgb2lch(r: 123, g: 40, b: 123) # {32.17, 55.27, 327.61}
