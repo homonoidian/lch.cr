@@ -127,7 +127,7 @@ be lossy, but might still fall prey to precision errors.</p>
   </h2>
   
     
-      <a href="https://github.com/homonoidian/lch.cr/blob/956b3aa8f83e574fc4dd697a13373076b0fa4ec5/src/lch.cr#L14" target="_blank">
+      <a href="https://github.com/homonoidian/lch.cr/blob/1410f993a4cae58d94f507cdf767742847cee7d5/src/lch.cr#L14" target="_blank">
         lch.cr
       </a>
     
@@ -255,7 +255,7 @@ be lossy, but might still fall prey to precision errors.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/homonoidian/lch.cr/blob/956b3aa8f83e574fc4dd697a13373076b0fa4ec5/src/lch.cr#L151" target="_blank">View source</a>]
+          [<a href="https://github.com/homonoidian/lch.cr/blob/1410f993a4cae58d94f507cdf767742847cee7d5/src/lch.cr#L159" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -276,7 +276,7 @@ be lossy, but might still fall prey to precision errors.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/homonoidian/lch.cr/blob/956b3aa8f83e574fc4dd697a13373076b0fa4ec5/src/lch.cr#L41" target="_blank">View source</a>]
+          [<a href="https://github.com/homonoidian/lch.cr/blob/1410f993a4cae58d94f507cdf767742847cee7d5/src/lch.cr#L41" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -297,7 +297,7 @@ be lossy, but might still fall prey to precision errors.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/homonoidian/lch.cr/blob/956b3aa8f83e574fc4dd697a13373076b0fa4ec5/src/lch.cr#L58" target="_blank">View source</a>]
+          [<a href="https://github.com/homonoidian/lch.cr/blob/1410f993a4cae58d94f507cdf767742847cee7d5/src/lch.cr#L58" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -313,10 +313,13 @@ be lossy, but might still fall prey to precision errors.</p>
         <div class="doc">
           
           <p>Returns an R, G, B tuple for the given LCH (CIELCh) color.</p>
-<p>The lightness component <em>l</em>, percents, is clamped to (and
-should be in) the range [0; 100].</p>
-<p>The chroma component <em>c</em> is clamped to (and should be in)
-the range [0; 145].</p>
+<p>The lightness component <em>l</em> is in percents, between 0
+(representing black) and 100 (representing white).</p>
+<p>The chroma component <em>c</em> (roughly representing the &quot;amount
+of color&quot;) is a number greater than or equal to 0. Note
+that although chroma is theoretically unbounded, in practice
+it does not exceed 230.</p>
+<p>The hue component <em>h</em> is in degrees.</p>
 <p>The resulting R, G, B components are in the range [0; 255].</p>
 <pre><code class="language-crystal"><span class="t">LCH</span>.lch2rgb(l: <span class="n">32.17</span>, c: <span class="n">55.27</span>, h: <span class="n">327.61</span>) <span class="c"># {123, 40, 123}</span></code></pre>
         </div>
@@ -324,7 +327,7 @@ the range [0; 145].</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/homonoidian/lch.cr/blob/956b3aa8f83e574fc4dd697a13373076b0fa4ec5/src/lch.cr#L97" target="_blank">View source</a>]
+          [<a href="https://github.com/homonoidian/lch.cr/blob/1410f993a4cae58d94f507cdf767742847cee7d5/src/lch.cr#L101" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -350,7 +353,7 @@ least three values -- for L, C, and H, correspondingly.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/homonoidian/lch.cr/blob/956b3aa8f83e574fc4dd697a13373076b0fa4ec5/src/lch.cr#L132" target="_blank">View source</a>]
+          [<a href="https://github.com/homonoidian/lch.cr/blob/1410f993a4cae58d94f507cdf767742847cee7d5/src/lch.cr#L140" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -371,7 +374,7 @@ least three values -- for L, C, and H, correspondingly.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/homonoidian/lch.cr/blob/956b3aa8f83e574fc4dd697a13373076b0fa4ec5/src/lch.cr#L169" target="_blank">View source</a>]
+          [<a href="https://github.com/homonoidian/lch.cr/blob/1410f993a4cae58d94f507cdf767742847cee7d5/src/lch.cr#L177" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -388,19 +391,23 @@ least three values -- for L, C, and H, correspondingly.</p>
           
           <p>Returns an L, C, H tuple for the given RGB color.</p>
 <p><em>r</em>, <em>g</em>, and <em>b</em> are clamped between [0; 255].</p>
-<p>The resulting lightness component L is in percents, in range
-[0; 100], rounded to two digits after the decimal place.</p>
-<p>The resulting chroma component C is in range [0; 145], rounded
+<p>The resulting lightness component L is in percents, between
+0 (representing black) and 100 (representing white), rounded
 to two digits after the decimal place.</p>
-<p>The resulting hue component H is in degress, in range [0; 360],
-rounded to two digits after the decimal place.</p>
+<p>The resulting chroma component C (roughly representing the
+&quot;amount of color&quot;) is a number greater than or equal to 0,
+rounded to two digits after the decimal place. Note that
+although chroma is theoretically unbounded, in practice it
+does not exceed 230.</p>
+<p>The resulting hue component H is in degress, between 0
+and 360, rounded to two digits after the decimal place.</p>
 <pre><code class="language-crystal"><span class="t">LCH</span>.rgb2lch(r: <span class="n">123</span>, g: <span class="n">40</span>, b: <span class="n">123</span>) <span class="c"># {32.17, 55.27, 327.61}</span></code></pre>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/homonoidian/lch.cr/blob/956b3aa8f83e574fc4dd697a13373076b0fa4ec5/src/lch.cr#L191" target="_blank">View source</a>]
+          [<a href="https://github.com/homonoidian/lch.cr/blob/1410f993a4cae58d94f507cdf767742847cee7d5/src/lch.cr#L203" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -426,7 +433,7 @@ least three values -- for R, G, and B, correspondingly.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/homonoidian/lch.cr/blob/956b3aa8f83e574fc4dd697a13373076b0fa4ec5/src/lch.cr#L219" target="_blank">View source</a>]
+          [<a href="https://github.com/homonoidian/lch.cr/blob/1410f993a4cae58d94f507cdf767742847cee7d5/src/lch.cr#L231" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -447,7 +454,7 @@ least three values -- for R, G, and B, correspondingly.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/homonoidian/lch.cr/blob/956b3aa8f83e574fc4dd697a13373076b0fa4ec5/src/lch.cr#L158" target="_blank">View source</a>]
+          [<a href="https://github.com/homonoidian/lch.cr/blob/1410f993a4cae58d94f507cdf767742847cee7d5/src/lch.cr#L166" target="_blank">View source</a>]
         
       </div>
     </div>

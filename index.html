@@ -110,7 +110,31 @@
                        rgb to lch   5.69M (175.74ns) (± 0.90%)  0.0B/op   62.18× slower
               lch to rgb, in sRGB   9.63M (103.83ns) (± 1.00%)  0.0B/op   36.74× slower
 lch to rgb with fitting into sRGB 486.06k (  2.06µs) (± 0.59%)  0.0B/op  727.92× slower</code></pre>
-<p>Your numbers may be different, but in general, fitting into sRGB will always be slower because doing this requires multiple conversions and a loop.</p>
+<p>Your numbers may be different, but in general, fitting into sRGB will always be slower
+because doing this requires multiple conversions and a loop.</p>
+<h2><a id="useful-links" class="anchor" href="#useful-links">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Useful links</h2>
+<ul>
+<li>An LCH <a href="https://lch.oklch.com/">color picker</a></li>
+<li>Another LCH <a href="https://css.land/lch/">color picker</a></li>
+<li><a href="https://lea.verou.me/2020/04/lch-colors-in-css-what-why-and-how/">LCH colors in CSS: what, why, and how?</a></li>
+<li><a href="https://atmos.style/blog/lch-color-space">LCH is the best color space!</a></li>
+</ul>
+<h2><a id="p.s" class="anchor" href="#p.s">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>P.S</h2>
+<p>I've just copied a lot of math I don't quite understand. If you do, however,
+feel free to make corrections &amp; contribute!</p>
+<p>It'd be cool to have a nice little <em>mathematically sound</em> LCH library for
+Crystal, because in practice, it makes dynamic color-choosing fun, and I
+believe that's <em>exactly</em> how programming graphics should feel!</p>
+<p>Also, feel free to add and PR any methods/objects/things you think are
+related to LCH.</p>
 <h2><a id="contributing" class="anchor" href="#contributing">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
