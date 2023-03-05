@@ -40,7 +40,27 @@ Several other, related conversion methods are public, but `rgb2lch` and
 lch to rgb with fitting into sRGB 486.06k (  2.06µs) (± 0.59%)  0.0B/op  727.92× slower
 ```
 
-Your numbers may be different, but in general, fitting into sRGB will always be slower because doing this requires multiple conversions and a loop.
+Your numbers may be different, but in general, fitting into sRGB will always be slower
+because doing this requires multiple conversions and a loop.
+
+## Useful links
+
+* An LCH [color picker](https://lch.oklch.com/)
+* Another LCH [color picker](https://css.land/lch/)
+* [LCH colors in CSS: what, why, and how?](https://lea.verou.me/2020/04/lch-colors-in-css-what-why-and-how/)
+* [LCH is the best color space!](https://atmos.style/blog/lch-color-space)
+
+## P.S
+
+I've just copied a lot of math I don't quite understand. If you do, however,
+feel free to make corrections & contribute!
+
+It'd be cool to have a nice little *mathematically sound* LCH library for
+Crystal, because in practice, it makes dynamic color-choosing fun, and I
+believe that's *exactly* how programming graphics should feel!
+
+Also, feel free to add and PR any methods/objects/things you think are
+related to LCH.
 
 ## Contributing
 
